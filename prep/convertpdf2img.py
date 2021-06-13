@@ -1,4 +1,5 @@
 from pdf2image import convert_from_path
+import os
 
 def convert_pdf2imgs(pdf_path, output_path):
     """ Convert pdf to jpg images """
@@ -9,6 +10,6 @@ def convert_pdf2imgs(pdf_path, output_path):
 
 
 if __name__ == "__main__":
-    PDF_PATH = "./../demo/"
-    OUTPUT_PATH = "tmp/test"
+    PDF_PATH = "../demo"
+    OUTPUT_PATH = "../tmp/test"
     convert_pdf2imgs(PDF_PATH, OUTPUT_PATH)
