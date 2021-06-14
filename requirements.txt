@@ -10,7 +10,6 @@ cloudpickle==1.6.0
 colorama==0.4.4
 cycler==0.10.0
 Cython==0.29.23
-detectron2==0.4.1
 future==0.18.2
 fvcore==0.1.5.post20210609
 google-auth==1.31.0
@@ -27,15 +26,19 @@ mypy-extensions==0.4.3
 numpy==1.20.3
 oauthlib==3.1.1
 omegaconf==2.1.0
+scikit-learn==0.24.2
+scikit-build==0.11.1
+cmake==3.20.2
 opencv-python==4.5.2.54
 pathspec==0.8.1
+pdf2text==1.0.0
+pdfminer==20191125
 pdf2image==1.15.1
 Pillow==8.2.0
 portalocker==2.3.0
 protobuf==3.17.3
 pyasn1==0.4.8
 pyasn1-modules==0.2.8
-pycocotools==2.0.2
 pydot==1.4.2
 pyparsing==2.4.7
 python-dateutil==2.8.1
@@ -59,3 +62,6 @@ urllib3==1.26.5
 Werkzeug==2.0.1
 yacs==0.1.8
 zipp==3.4.1
+setuptools
+mock
+scipy

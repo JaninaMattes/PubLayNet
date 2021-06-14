@@ -4,11 +4,15 @@ FROM nvcr.io/nvidia/pytorch:20.12-py3
 # Install linux packages
 RUN apt update && apt install -y screen libgl1-mesa-glx
 
+# Install python
+RUN apt-get update -y
+RUN apt-get install -y python2.7
+
 # Install python dependencies
-RUN pip install --upgrade pip
 COPY requirements.txt .
-RUN pip install -r requirements.txt
-RUN pip install gsutil
+RUN python -m pip install --upgrade pip
+RUN pip uninstall -y nvidia-tensorboard nvidia-tensorboard-plugin-dlprof
+RUN pip install --no-cache -r requirements.txt coremltools onnx gsutil notebook 
 
 # Use Caffe2 image as parent image
 FROM caffe2/caffe2:snapshot-py2-cuda9.0-cudnn7-ubuntu16.04
@@ -23,7 +27,8 @@ ENV LD_LIBRARY_PATH /usr/local/caffe2_build/lib:${LD_LIBRARY_PATH}
 RUN git clone https://github.com/facebookresearch/detectron /detectron
 
 # Install Python dependencies
-RUN pip install -r /detectron/requirements.txt
+# RUN pip install --upgrade pip
+# RUN pip install -r /detectron/requirements.txt
 
 # Install the COCO API
 RUN git clone https://github.com/cocodataset/cocoapi.git /cocoapi
@@ -45,6 +50,9 @@ WORKDIR /usr/src/app
 
 # Copy contents
 COPY . /usr/src/app
+
+# Set environment variables
+ENV HOME=/usr/src/app
 
 # ---------------------------------------------------  Extras Below  ---------------------------------------------------
 
