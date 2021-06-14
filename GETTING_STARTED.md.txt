@@ -11,7 +11,7 @@ This document provides brief tutorials covering Detectron for inference and trai
 To run inference on a directory of image files (`demo/*.jpg` in this example), you can use the `infer_simple.py` tool. In this example, we're using an end-to-end trained Mask R-CNN model with a ResNet-101-FPN backbone from the model zoo:
 
 ```
-python ./inference/infer_simple.py \
+python3 ./inference/infer_simple.py \
     --cfg configs/12_2017_baselines/e2e_mask_rcnn_X-101-64x4d-FPN_1x.yaml \
     --output-dir /tmp/detectron-visualizations \
     --image-ext jpg \
