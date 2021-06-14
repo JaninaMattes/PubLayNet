@@ -10,22 +10,34 @@ COPY requirements.txt .
 RUN pip install -r requirements.txt
 RUN pip install gsutil
 
-# Install Java bin
-# Install OpenJDK-8
-RUN apt-get update && \
-    apt-get install -y openjdk-8-jdk && \
-    apt-get install -y ant && \
-    apt-get clean;
+# Use Caffe2 image as parent image
+FROM caffe2/caffe2:snapshot-py2-cuda9.0-cudnn7-ubuntu16.04
 
-# Fix certificate issues
-RUN apt-get update && \
-    apt-get install ca-certificates-java && \
-    apt-get clean && \
-    update-ca-certificates -f;
+RUN mv /usr/local/caffe2 /usr/local/caffe2_build
+ENV Caffe2_DIR /usr/local/caffe2_build
 
-# Setup JAVA_HOME -- useful for docker commandline
-ENV JAVA_HOME /usr/lib/jvm/java-8-openjdk-amd64/
-RUN export JAVA_HOME
+ENV PYTHONPATH /usr/local/caffe2_build:${PYTHONPATH}
+ENV LD_LIBRARY_PATH /usr/local/caffe2_build/lib:${LD_LIBRARY_PATH}
+
+# Clone the Detectron repository
+RUN git clone https://github.com/facebookresearch/detectron /detectron
+
+# Install Python dependencies
+RUN pip install -r /detectron/requirements.txt
+
+# Install the COCO API
+RUN git clone https://github.com/cocodataset/cocoapi.git /cocoapi
+WORKDIR /cocoapi/PythonAPI
+RUN make install
+
+# Go to Detectron root
+WORKDIR /detectron
+
+# Set up Python modules
+RUN make
+
+# [Optional] Build custom ops
+RUN make ops
 
 # Create working directory
 RUN mkdir -p /usr/src/app
@@ -33,7 +45,6 @@ WORKDIR /usr/src/app
 
 # Copy contents
 COPY . /usr/src/app
-
 
 # ---------------------------------------------------  Extras Below  ---------------------------------------------------
 
