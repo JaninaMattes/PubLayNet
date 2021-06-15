@@ -112,7 +112,7 @@ def parse_args():
         type=float
     )
     parser.add_argument(
-        'im_or_folder', help='image or folder of images', default=None
+        '--im_or_folder', help='image or folder of images', default=None
     )
     if len(sys.argv) == 1:
         parser.print_help()

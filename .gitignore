@@ -9,16 +9,18 @@ __pycache__/
 # large training data files
 *.jpg
 *.png 
-*.jpeg 
+*.jpeg
+*.pdf
 
 # C extensions
 *.so
 
 # Editor
-.vscode
+.vscode/
 
 # Distribution / packaging
 .Python
+pytorch/
 build/
 develop-eggs/
 dist/
