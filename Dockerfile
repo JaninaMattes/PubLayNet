@@ -36,8 +36,11 @@ RUN sudo apt-get install -y libjasper-dev
 
 # Build opencv from source
 RUN sudo apt-get -y install git
-RUN git clone https://github.com/opencv/opencv.git && cd opencv
-RUN mkdir build && cd build
+RUN git clone https://github.com/opencv/opencv.git 
+RUN cd opencv
+
+RUN mkdir build 
+RUN cd build
 
 RUN cmake ../
 RUN make
@@ -69,5 +72,7 @@ COPY . . /publaynet
 # CMD ["main:publaynet", "--port", "80"]
 
 #---------------------------------------------------------------------------------------------------    
+# build conainer: docker build -t docker-ml-model-v1 .
 # run container: docker run -dit docker-ml-model-v1
+# run interactive mode: docker run -it docker-ml-model-v1 /bin/bash
 # inference: docker run docker-ml-model-v1 python3 ./inference/infer_simple.py --cfg ./configs/Mask-RCNN/e2e_mask_rcnn_X-101-64x4d-FPN_1x.yaml --output-dir ./tmp/detectron-visualizations --image-ext png --always-out --im_or_folder image --wts https://dax-cdn.cdn.appdomain.cloud/dax-publaynet/1.0.0/pre-trained-models/Mask-RCNN/model_final.pkl
