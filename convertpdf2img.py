@@ -8,7 +8,8 @@ def convert_pdf2imgs(pdf_path, output_path):
     try:
         for pdf_file in pdf_path:
             if pdf_file.endswith('.pdf'):
-                pages = convert_from_path(pdf_file, dpi=300)
+                pages = convert_from_path(pdf_file, dpi=300, \
+                    poppler_path=r'C:/Program Files/Poppler/bin')
                 pdf_file = pdf_file.split("/")[2][:-4]
                 # save jpg images
                 for page in pages:
