@@ -1,6 +1,6 @@
 scikit-build
 scikit-learn
-numpy==1.14.5
+numpy==1.22.0
 pyyaml
 matplotlib
 opencv-python==4.1.1.26 # other versions are buggy in python2.7
