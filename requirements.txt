@@ -3,7 +3,7 @@ scikit-learn
 numpy==1.14.5
 pyyaml
 matplotlib
-opencv-python==4.1.1.26 # other versions are buggy in python2.7
+opencv-python==4.2.0.32 # other versions are buggy in python2.7
 setuptools
 Cython
 mock
